@@ -1,6 +1,6 @@
 FROM python:latest
 
-WORKDIR /app
+WORKDIR /
 
 COPY requirements.txt ./
 
@@ -10,6 +10,6 @@ COPY . .
 
 RUN pytest test.py
 
-EXPOSE 5000
+EXPOSE 3000
 
 CMD ["python", "Main.py"]
