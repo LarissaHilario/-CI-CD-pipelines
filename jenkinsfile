@@ -16,8 +16,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'pytest'
+                    docker.image(DOCKER_IMAGE).inside('-v $PWD:/workspace -w /workspace') {
+                        sh 'pytest test.py'
                     }
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).run('-d -p 5000:5000')
+                    sh 'docker run -d -p 5000:5000 $DOCKER_IMAGE'
                 }
             }
         }
