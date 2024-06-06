@@ -1,7 +1,7 @@
-import requests
 import pytest
-
+from Main import app
 
 def test_root_route():
-    response = requests.get("http://127.0.0.1:5000")
-    assert response.status_code == 200
+    with app.test_client() as client:
+        response = client.get("/")
+        assert response.status_code == 200
